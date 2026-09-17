@@ -10,11 +10,33 @@ One store, three components.
 
 ## Screenshots
 
-Coming with the first release.
+![A white page headed My grocery list with a field Item to buy, an Add button greyed out, and the line Items bought: 0 / 0 next to a disabled Clear the list button](preview-empty.png)
+
+![The same page with three items in a list, Pommes, Fraises and Poulet, each with an empty checkbox, and Items bought: 0 / 3](preview.png)
+
+![The same list with Fraises and Poulet ticked, Items bought: 2 / 3, and the Clear the list button enabled](preview-checked.png)
+
+![The same list on a phone, the field and the Add button stacked, three items, two ticked](preview-mobile.png)
 
 ## How it works
 
-Described with the first release.
+**One store holds the list.** `stores/grocery.js` is a Pinia setup store:
+`items` is a `ref`, `boughtCount` and `totalCount` are `computed`, and
+`addItem`, `toggleItem` and `clear` are the only ways to change the list.
+No component keeps a copy of the items; they all call `useGroceryStore()`.
+
+**Three components, one job each.** `GroceryList` is the page: it renders
+the form, one `GroceryItem` per item, the count and the clear button.
+`AddItemForm` owns the text field, keeps Add disabled while the field is
+blank, and hands the name to the store on submit. `GroceryItem` shows one
+line with its checkbox and calls `toggleItem` when the box changes.
+
+**The count is derived, never stored.** `boughtCount` is a `computed` over
+the items, so ticking a box updates the line under the list without any
+code that counts.
+
+**Blank entries never get in.** The store trims the name and ignores an
+empty one; the form mirrors that rule by disabling the button.
 
 ## Running it
 
