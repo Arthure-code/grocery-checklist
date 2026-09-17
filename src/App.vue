@@ -1,5 +1,5 @@
 <script setup>
-// The list component comes in the next change.
+import GroceryList from './components/GroceryList.vue'
 </script>
 
 <template>
@@ -14,8 +14,7 @@
     <main class="container flex-grow-1 pb-5">
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
-          <h1 class="display-5">My grocery list</h1>
-          <p class="text-muted">The list is on its way.</p>
+          <GroceryList />
         </div>
       </div>
     </main>
